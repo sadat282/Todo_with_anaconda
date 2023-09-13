@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center task-detail">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h2>{{ task.title }}</h2>
+        </div>
+        <div class="card-body">
+          <p>{{ task.description }}</p>
+          <p>Due date: {{ task.due_date }}</p>
+        </div>
+        <div class="card-footer text-right">
+          <div class="btn-group">
+            <a href="{% url 'task_edit' task.id %}" class="btn btn-primary">Edit</a>
+            <form action="{% url 'task_delete' task.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
